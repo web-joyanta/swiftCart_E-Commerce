@@ -93,7 +93,7 @@ const productDetails = async (id) => {
           <button onclick="addToCart(${data.price})" class="btn btn-outline flex-1">
             Add to Cart
           </button>
-          <button class="btn btn-primary flex-1">
+          <button onclick="addToCart(${data.price})" class="btn btn-primary flex-1">
             Buy Now
           </button>
         </div>
