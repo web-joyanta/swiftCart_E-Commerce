@@ -7,14 +7,14 @@
 ## 🌐 Live Website
 
 🔗 Live Link:  
-https://yourusername.github.io/javascript-interview-qa-bangla/
+https://swift-cart-pro.netlify.app
 
 ---
 
 ## 📂 GitHub Repository
 
 🔗 Repository Link:  
-https://github.com/yourusername/javascript-interview-qa-bangla
+https://github.com/web-joyanta/swiftCart_E-Commerce
 
 ---
 
