@@ -56,18 +56,53 @@ const displayCategories = (categories) => {
         categoriesContainer.appendChild(ElementCategory);
     })
 }
-const prod = {
-    "id": 16,
-    "title": "Lock and Love Women's Removable Hooded Faux Leather Moto Biker Jacket",
-    "price": 29.95,
-    "description": "100% POLYURETHANE(shell) 100% POLYESTER(lining) 75% POLYESTER 25% COTTON (SWEATER), Faux leather material for style and comfort / 2 pockets of front, 2-For-One Hooded denim style faux leather jacket, Button detail on waist / Detail stitching at sides, HAND WASH ONLY / DO NOT BLEACH / LINE DRY / DO NOT IRON",
-    "category": "women's clothing",
-    "image": "https://fakestoreapi.com/img/81XH0e8fefL._AC_UY879_t.png",
-    "rating": {
-        "rate": 2.9,
-        "count": 340
-    }
-}
+const productDetails = async (id) => {
+    const res = await fetch(`https://fakestoreapi.com/products/${id}`);
+    const data = await res.json();
+
+    const modalContent = document.getElementById("modal_content");
+    modalContent.innerHTML = `
+    <div class="grid md:grid-cols-2 gap-8 p-8">
+      <div class="bg-base-200 rounded-xl p-6 flex items-center justify-center">
+        <img src="${data.image}" 
+             alt="${data.title}" 
+             class="max-h-96 object-contain">
+      </div>
+      <div class="space-y-4">
+        <span class="badge badge-primary badge-outline capitalize">
+          ${data.category}
+        </span>
+        <h2 class="text-2xl font-bold leading-tight">
+          ${data.title}
+        </h2>
+        <div class="flex items-center gap-2">
+          <div class="rating rating-sm">
+            <input type="radio" class="mask mask-star-2 bg-orange-400" ${data.rating.rate >= 1 ? "checked" : ""}/>
+          </div>
+          <span class="text-sm text-gray-500">
+            ${data.rating.rate} ⭐ (${data.rating.count} reviews)
+          </span>
+        </div>
+        <p class="text-3xl font-bold text-primary">
+          $${data.price}
+        </p>
+        <p class="text-gray-600 text-sm leading-relaxed">
+          ${data.description}
+        </p>
+        <div class="flex gap-4 pt-4">
+          <button class="btn btn-outline flex-1">
+            Add to Cart
+          </button>
+          <button class="btn btn-primary flex-1">
+            Buy Now
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
+    document.getElementById("product_modal").showModal();
+};
+
 const displayProducts = (products) => {
     const productsContainer = document.getElementById("products-container");
     productsContainer.innerHTML = "";
@@ -94,7 +129,7 @@ const displayProducts = (products) => {
                             </h2>
                             <p class="text-lg md:text-xl font-bold mt-1">$${product?.price}</p>
                             <div class="card-actions justify-between mt-4 gap-2">
-                                <button class="btn btn-outline flex-1 text-xs md:text-sm">
+                                <button onclick="productDetails(${product?.id})" class="btn btn-outline flex-1 text-xs md:text-sm">
                                     <i class="fa-solid fa-eye"></i> Details
                                 </button>
                                 <button class="btn btn-primary flex-1 text-xs md:text-sm">
