@@ -152,12 +152,51 @@ const loadProducts = async () => {
     try {
         const res = await fetch("https://fakestoreapi.com/products");
         const data = await res.json();
+        const top = data.sort((a, b) => (b.rating?.rate || 0) - (a.rating?.rate || 0)).slice(0, 3);
         displayProducts(data);
+        displayTopProducts(top);
     } catch (err) {
         const productsContainer = document.getElementById("products-container");
         productsContainer.innerHTML = `<p class="text-center text-red-500 py-8">Failed to load products.</p>`;
         console.error(err);
     }
+}
+const displayTopProducts = (products) => {
+    const container = document.getElementById("top-products");
+    container.innerHTML = "";
+    products.reverse().forEach(product => {
+        const divElement = document.createElement("div");
+        divElement.innerHTML = `
+                    <div class="card w-full  bg-base-100 shadow-md hover:shadow-xl transition duration-300 flex flex-col">
+                        <figure class="p-4 bg-gray-100 flex-shrink-0 h-48 md:h-56 lg:h-64">
+                            <img class="w-full h-full object-contain" src="${product?.image}" alt="${product?.title}" />
+                        </figure>
+                        <div class="card-body flex flex-col flex-1 justify-between">
+                            <div class="flex justify-between items-center text-sm mb-2">
+                                <span class="badge badge-primary badge-outline rounded-3xl text-xs md:text-sm">
+                                   ${product?.category}
+                                </span>
+                                <span class="text-yellow-500 font-semibold text-xs md:text-sm">
+                                    <i class="fa-solid fa-star"></i> ${product?.rating?.rate} (${product?.rating?.count})
+                                </span>
+                            </div>
+                            <h2 class="card-title text-base md:text-lg font-medium truncate" title="${product?.title}">
+                                ${product?.title.length > 30 ? product?.title.slice(0, 30) + "..." : product?.title}
+                            </h2>
+                            <p class="text-lg md:text-xl font-bold mt-1">$${product?.price}</p>
+                            <div class="card-actions justify-between mt-4 gap-2">
+                                <button onclick="productDetails(${product?.id})" class="btn btn-outline flex-1 text-xs md:text-sm">
+                                    <i class="fa-solid fa-eye"></i> Details
+                                </button>
+                                <button class="btn btn-primary flex-1 text-xs md:text-sm">
+                                    <i class="fa-solid fa-cart-shopping"></i> Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+      `;
+        container.appendChild(divElement);
+    });
 }
 loadCategories();
 loadProducts();
