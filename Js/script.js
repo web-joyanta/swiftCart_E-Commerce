@@ -1,10 +1,25 @@
 const filterByCategory = async (category) => {
     console.log(category)
-    const res = await fetch(`https://fakestoreapi.com/products/category/${category}`);
-    const data = await res.json();
+    showLoader();
+    try {
+        const res = await fetch(`https://fakestoreapi.com/products/category/${category}`);
+        const data = await res.json();
+        displayProducts(data);
+    } catch (err) {
+        const productsContainer = document.getElementById("products-container");
+        productsContainer.innerHTML = `<p class="text-center text-red-500 py-8">Failed to load products.</p>`;
+    }
+}
+
+const showLoader = () => {
+    const productsContainer = document.getElementById("products-container");
+    productsContainer.classList.remove('grid', 'grid-cols-1', 'sm:grid-cols-2', 'lg:grid-cols-3', 'gap-4');
+    productsContainer.innerHTML = `<div class="flex justify-center items-center py-20 w-full"><span class="loading loading-dots loading-lg"></span></div>`;
+}
+
+const hideLoader = () => {
     const productsContainer = document.getElementById("products-container");
     productsContainer.innerHTML = "";
-    displayProducts(data);
 }
 const activeCategoryBtn = (category) => {
     const categoryButtons = document.querySelectorAll("#categories-container button");
@@ -98,9 +113,16 @@ const loadCategories = async () => {
     displayCategories(data);
 }
 const loadProducts = async () => {
-    const res = await fetch("https://fakestoreapi.com/products");
-    const data = await res.json();
-    displayProducts(data);
+    showLoader();
+    try {
+        const res = await fetch("https://fakestoreapi.com/products");
+        const data = await res.json();
+        displayProducts(data);
+    } catch (err) {
+        const productsContainer = document.getElementById("products-container");
+        productsContainer.innerHTML = `<p class="text-center text-red-500 py-8">Failed to load products.</p>`;
+        console.error(err);
+    }
 }
 loadCategories();
 loadProducts();
