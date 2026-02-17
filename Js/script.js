@@ -6,6 +6,18 @@ const filterByCategory = async (category) => {
     productsContainer.innerHTML = "";
     displayProducts(data);
 }
+const activeCategoryBtn = (category) => {
+    const categoryButtons = document.querySelectorAll("#categories-container button");
+    categoryButtons.forEach(btn => {
+        if (btn.textContent.toLowerCase() === category.toLowerCase()) {
+            btn.classList.remove("btn-outline", "text-gray-600");
+            btn.classList.add("btn-primary");
+        } else {
+            btn.classList.remove("btn-primary");
+            btn.classList.add("btn-outline", "text-gray-600");
+        }
+    })
+}
 const displayCategories = (categories) => {
     const categoriesContainer = document.getElementById("categories-container");
     categoriesContainer.innerHTML = "";
@@ -14,16 +26,17 @@ const displayCategories = (categories) => {
     const allBtn = document.createElement("button");
     allBtn.className = "btn btn-primary rounded-3xl";
     allBtn.textContent = "ALL";
-    allBtn.addEventListener('click', () => loadProducts());
+    allBtn.addEventListener('click', () => { activeCategoryBtn('ALL'); loadProducts(); });
     divElement.appendChild(allBtn);
     categoriesContainer.appendChild(divElement);
+    activeCategoryBtn('ALL');
 
     categories.forEach(category => {
         const ElementCategory = document.createElement("div");
         const btn = document.createElement("button");
         btn.className = "btn btn-outline text-gray-600 rounded-3xl";
         btn.textContent = category.toLowerCase().split(" ").map(word => word[0].toUpperCase() + word.slice(1)).join(" ");
-        btn.addEventListener('click', () => filterByCategory(category));
+        btn.addEventListener('click', () => { activeCategoryBtn(category); filterByCategory(category); });
         ElementCategory.appendChild(btn);
         categoriesContainer.appendChild(ElementCategory);
     })
