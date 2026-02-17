@@ -90,7 +90,7 @@ const productDetails = async (id) => {
           ${data.description}
         </p>
         <div class="flex gap-4 pt-4">
-          <button class="btn btn-outline flex-1">
+          <button onclick="addToCart(${data.price})" class="btn btn-outline flex-1">
             Add to Cart
           </button>
           <button class="btn btn-primary flex-1">
@@ -101,6 +101,25 @@ const productDetails = async (id) => {
     </div>
   `;
     document.getElementById("product_modal").showModal();
+};
+// product cart add button click to saved data from LocalStorage
+let cart = parseInt(localStorage.getItem("cartCount")) || 0;
+let cartTotalPrice = parseFloat(localStorage.getItem("cartTotalPrice")) || 0.00;
+const cartCountElement = document.getElementsByClassName("cart-count");
+const cartTotalElement = document.getElementById("cart-total-price");
+updateCartUI();
+function updateCartUI() {
+    cartTotalElement.innerText = cartTotalPrice.toFixed(2);
+    for (let i = 0; i < cartCountElement.length; i++) {
+        cartCountElement[i].innerText = cart;
+    }
+}
+const addToCart = (price) => {
+    cart++;
+    cartTotalPrice += price;
+    updateCartUI();
+    localStorage.setItem("cartCount", cart);
+    localStorage.setItem("cartTotalPrice", cartTotalPrice);
 };
 
 const displayProducts = (products) => {
@@ -132,7 +151,7 @@ const displayProducts = (products) => {
                                 <button onclick="productDetails(${product?.id})" class="btn btn-outline flex-1 text-xs md:text-sm">
                                     <i class="fa-solid fa-eye"></i> Details
                                 </button>
-                                <button class="btn btn-primary flex-1 text-xs md:text-sm">
+                                <button onclick="addToCart(${product?.price})" class="btn btn-primary flex-1 text-xs md:text-sm">
                                     <i class="fa-solid fa-cart-shopping"></i> Add
                                 </button>
                             </div>
@@ -188,7 +207,7 @@ const displayTopProducts = (products) => {
                                 <button onclick="productDetails(${product?.id})" class="btn btn-outline flex-1 text-xs md:text-sm">
                                     <i class="fa-solid fa-eye"></i> Details
                                 </button>
-                                <button class="btn btn-primary flex-1 text-xs md:text-sm">
+                                <button onclick="addToCart(${product?.price})" class="btn btn-primary flex-1 text-xs md:text-sm">
                                     <i class="fa-solid fa-cart-shopping"></i> Add
                                 </button>
                             </div>
@@ -198,5 +217,6 @@ const displayTopProducts = (products) => {
         container.appendChild(divElement);
     });
 }
+
 loadCategories();
 loadProducts();
