@@ -1,9 +1,30 @@
+const filterByCategory = async (category) => {
+    console.log(category)
+    const res = await fetch(`https://fakestoreapi.com/products/category/${category}`);
+    const data = await res.json();
+    const productsContainer = document.getElementById("products-container");
+    productsContainer.innerHTML = "";
+    displayProducts(data);
+}
 const displayCategories = (categories) => {
     const categoriesContainer = document.getElementById("categories-container");
+    categoriesContainer.innerHTML = "";
+
+    const divElement = document.createElement("div");
+    const allBtn = document.createElement("button");
+    allBtn.className = "btn btn-primary rounded-3xl";
+    allBtn.textContent = "ALL";
+    allBtn.addEventListener('click', () => loadProducts());
+    divElement.appendChild(allBtn);
+    categoriesContainer.appendChild(divElement);
 
     categories.forEach(category => {
         const ElementCategory = document.createElement("div");
-        ElementCategory.innerHTML = `<div class="btn btn-outline text-gray-600 rounded-3xl">${category.toLowerCase().split(" ").map(word => word[0].toUpperCase() + word.slice(1)).join(" ")}</div>`
+        const btn = document.createElement("button");
+        btn.className = "btn btn-outline text-gray-600 rounded-3xl";
+        btn.textContent = category.toLowerCase().split(" ").map(word => word[0].toUpperCase() + word.slice(1)).join(" ");
+        btn.addEventListener('click', () => filterByCategory(category));
+        ElementCategory.appendChild(btn);
         categoriesContainer.appendChild(ElementCategory);
     })
 }
@@ -21,8 +42,10 @@ const prod = {
 }
 const displayProducts = (products) => {
     const productsContainer = document.getElementById("products-container");
+    productsContainer.innerHTML = "";
+    productsContainer.classList.add('grid', 'grid-cols-1', 'sm:grid-cols-2', 'lg:grid-cols-3', 'gap-4');
+
     products.forEach(product => {
-        console.log(product)
         const divElement = document.createElement("div");
         divElement.innerHTML = `
                     <div class="card w-full  bg-base-100 shadow-md hover:shadow-xl transition duration-300 flex flex-col">
@@ -55,7 +78,6 @@ const displayProducts = (products) => {
                     `
         productsContainer.appendChild(divElement);
     })
-    console.log(products);
 }
 const loadCategories = async () => {
     const res = await fetch("https://fakestoreapi.com/products/categories");
