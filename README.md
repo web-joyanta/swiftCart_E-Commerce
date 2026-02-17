@@ -1,143 +1,181 @@
-## WELCOME TO ( সহজ সরল সিম্পল ) ASSIGNMENT (SwiftCart E-Commerce)
+# 📘 JavaScript Basic Interview Questions (Bangla)
 
-
-## Repository: Create your own public repository and submit the link.
-
----
-## 🛍️ API Endpoints
----
-1. Get 🛍️ All Products
-```bash
-https://fakestoreapi.com/products
-```
-
-2. Get 🛍️ All Categories
-```bash
-https://fakestoreapi.com/products/categories
-```
-
-3. Get 🛍️ Products by Category
-```bash
-https://fakestoreapi.com/products/category/${category}
-```
-
-Example:
-```bash
-https://fakestoreapi.com/products/category/jewelery
-```
-
-4. Get 🛍️ Single Product Detail
-```bash
-https://fakestoreapi.com/products/${id}
-```
-
-Example:
-```bash
-https://fakestoreapi.com/products/1
-```
+এই রিপোজিটরিতে JavaScript এর গুরুত্বপূর্ণ ৫টি ইন্টারভিউ প্রশ্নের সহজ ও পরিষ্কার বাংলা ব্যাখ্যা দেওয়া হয়েছে।
 
 ---
 
-## 🎯 Project Specifications (UI/UX)
+## 🌐 Live Website
 
-#### 1) Navbar
-- Website **logo/name** ("SwiftCart") on the **left**
-- **Menu items** (Home, Products, About, Contact) in the **center**
-- **Cart Icon/Button** on the **right** (showing item count is a bonus)
-
-#### 2) Banner / Hero Section
-- A **background image** (related to shopping/fashion/electronics)
-- A **title** (e.g., "Best Collection For You") and **subtitle**
-- A **centered button** (e.g., "Shop Now")
-
-#### 3) Features / Why Choose Us
-- **Section heading**
-- **3-4 items** highlighting features like "Fast Delivery", "24/7 Support", "Secure Payment", etc. (Icon + Title + Short Text)
-
-#### 4) Trending / Top Rated Section
-- Show **3 top-rated products** (you can filter by rating or just pick the first 3) based on API data or hardcoded for layout practice.
-
-#### 5) Newsletter & Footer
-- **Newsletter Subscription Form**: Email input + Subscribe button.
-- **Footer** with copyright info, social links, and quick links.
-
-#### 6) Responsiveness
-- Website must be **mobile responsive** 
+🔗 Live Link:  
+https://yourusername.github.io/javascript-interview-qa-bangla/
 
 ---
-#### 7) Create a README file to answer the following questions-
 
-> **⚠️ Warning:** Do not use any AI tools to answer these questions. You must write the answers in **Bangla**.
+## 📂 GitHub Repository
 
-#### 1) What is the difference between `null` and `undefined`?
+🔗 Repository Link:  
+https://github.com/yourusername/javascript-interview-qa-bangla
 
-#### 2) What is the use of the `map()` function in JavaScript? How is it different from `forEach()`?
+---
 
-#### 3) What is the difference between `==` and `===`?
+## 1️⃣ null এবং undefined এর মধ্যে পার্থক্য কী?
 
-#### 4) What is the significance of `async`/`await` in fetching API data?
+### 🔹 undefined
+যখন একটি ভ্যারিয়েবল declare করা হয় কিন্তু তাকে কোনো value দেওয়া হয় না, তখন JavaScript স্বয়ংক্রিয়ভাবে তাকে `undefined` দেয়।
 
-#### 5) Explain the concept of Scope in JavaScript (Global, Function, Block).
+```js
+let name;
+console.log(name); // undefined
+```
 
-## ⚡ Dynamic Features & Functionalities
+### 🔹 null
+যখন developer ইচ্ছা করে একটি ভ্যারিয়েবলকে empty হিসেবে সেট করে, তখন `null` ব্যবহার করা হয়।
 
-1) Category Loading
-Load Product Categories dynamically on the UI (e.g., as filter buttons or a dropdown).
+```js
+let user = null;
+```
 
-2) Category Click → Product Data
-On clicking a category: load products of that specific category.
-Display in a grid layout (e.g., 3 or 4 columns).
+### ✅ পার্থক্য সংক্ষেপে
 
-3) Card Contents
-Each product card must include:
-- **Image** (from API)
-- **Title** (truncated if too long)
-- **Price** ($ value)
-- **Category** (badge or text)
-- **Rating** (Visualize stars or just show the number)
-- **Details Button**
-- **Add to Cart button**
+| undefined | null |
+|------------|------|
+| JavaScript নিজে থেকে দেয় | Developer নিজে দেয় |
+| value assign করা হয়নি | ইচ্ছা করে empty রাখা হয়েছে |
 
-4) Modal on "Details" Click
-Clicking the "Details" button on a card opens a modal with full product details:
-- Full Title
-- Full Description
-- Price & Rating
-- "Buy Now" or "Add to Cart" button in modal.
+---
 
-## 🧪 Challenges (Optional)
+## 2️⃣ map() এবং forEach() এর পার্থক্য
 
-    1) Add to Cart Interaction
-    Clicking "Add to Cart":
-    - Adds the product to a Cart list/array.
-    - Updates a Cart Count in the Navbar.
-    - (Optional) Persist in LocalStorage.
+### 🔹 map()
 
-    2) Cart Calculation
-    Show a summary (maybe in a sidebar or a separate section/modal) that lists added items and calculates the **Total Price**.
+- নতুন একটি array return করে
+- Data transform করার জন্য ব্যবহার হয়
 
-    3) Remove from Cart
-    Ability to remove an item from the cart and update the Total Price instantly.
+```js
+const numbers = [1, 2, 3];
+const double = numbers.map(num => num * 2);
 
-    4) Loading Spinner
-    Show a loading spinner or skeleton loader while fetching data from the API.
+console.log(double); // [2, 4, 6]
+```
 
-    5) Active State
-    Highlight the currently selected category button.
+---
 
-🧰 Technology Stack:
-    HTML
-    CSS (Vanilla / Tailwind / DaisyUI)
-    JavaScript (Vanilla only, no frameworks like React/Vue for this assignment)
+### 🔹 forEach()
 
-📌 Rules
-✅ At least 5 meaningful commits
-❌ No dummy text where real data can be shown.
+- শুধু loop করার জন্য ব্যবহার হয়
+- কোনো নতুন array return করে না
 
-## 🔗 Submission
-- **Live Link :** YOUR_DEPLOYED_URL_HERE
-- **GitHub Repository:** YOUR_REPO_URL_HERE
+```js
+numbers.forEach(num => {
+  console.log(num);
+});
+```
 
+### ✅ পার্থক্য সংক্ষেপে
 
-### 📅 Deadline For 60 marks: 17th February, 2026 (11:59 pm ⏱️)
-- Note: There won't be any 50 or 30 marks submission deadline. Only 60 marks submission deadline. After 17th February, 2026 (11:59 pm ⏱️) no submission will be accepted.
+| map() | forEach() |
+|--------|-----------|
+| নতুন array তৈরি করে | কিছু return করে না |
+| transformation এর জন্য | শুধু loop এর জন্য |
+
+---
+
+## 3️⃣ == এবং === এর পার্থক্য
+
+### 🔹 == (Double Equal)
+
+- শুধু value compare করে
+- type check করে না
+
+```js
+5 == "5" // true
+```
+
+---
+
+### 🔹 === (Triple Equal)
+
+- value এবং type দুটোই compare করে
+
+```js
+5 === "5" // false
+```
+
+### ✅ Best Practice
+
+সবসময় `===` ব্যবহার করা উচিত, কারণ এটি বেশি নিরাপদ।
+
+---
+
+## 4️⃣ async/await এর গুরুত্ব (API Fetch করার ক্ষেত্রে)
+
+API থেকে data আনতে সময় লাগে। এটি একটি asynchronous কাজ।
+
+`async/await` ব্যবহার করলে code readable ও clean হয়।
+
+```js
+const loadData = async () => {
+  const res = await fetch("https://api.example.com");
+  const data = await res.json();
+  console.log(data);
+};
+```
+
+### ✅ সুবিধা
+
+- Code সহজে বোঝা যায়
+- Callback hell এড়ানো যায়
+- Error handling সহজ হয়
+
+---
+
+## 5️⃣ JavaScript এ Scope কী?
+
+Scope মানে হলো — কোন জায়গা থেকে কোন ভ্যারিয়েবল access করা যাবে।
+
+### 🔹 Global Scope
+
+```js
+let name = "Joyanta";
+```
+
+সব জায়গা থেকে access করা যায়।
+
+---
+
+### 🔹 Function Scope
+
+```js
+function test() {
+  let age = 25;
+}
+```
+
+শুধু function এর ভিতরে ব্যবহার করা যায়।
+
+---
+
+### 🔹 Block Scope
+
+```js
+if (true) {
+  let city = "Dhaka";
+}
+```
+
+শুধু `{}` এর ভিতরে কাজ করবে।
+
+---
+
+## 📌 সংক্ষেপে Scope
+
+- Global → সব জায়গা থেকে access  
+- Function → শুধু function এর ভিতরে  
+- Block → শুধু `{}` এর ভিতরে  
+
+---
+
+# 👨‍💻 Author
+
+**Joyanta Kumar Barman**  
+Front-End & Back-End Web Developer
